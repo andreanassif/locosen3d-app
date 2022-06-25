@@ -1,12 +1,3 @@
-let carritoDeCompras = []
-
-document.addEventListener('DOMContentLoaded', () => {
-    if(localStorage.getItem('carritoDeCompras')){
-        carritoDeCompras = JSON.parse(localStorage.getItem('carritoDeCompras'))
-        actualizarCarrito()
-    }
-})
-
 const contenedorProductos = document.getElementById('contenedor-productos');
 const contenedorCarrito = document.getElementById('carrito-contenedor');
 
@@ -19,6 +10,14 @@ const precioTotal = document.getElementById('precioTotal');
 const selecTipos = document.getElementById('selecTipos')
 const buscador = document.getElementById('search')
 
+let carritoDeCompras = []
+
+document.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem('carritoDeCompras')){
+        carritoDeCompras = JSON.parse(localStorage.getItem('carritoDeCompras'))
+        actualizarCarrito()
+    }
+})
 
 
 
@@ -61,13 +60,13 @@ function mostrarProductos(array){
 
     contenedorProductos.appendChild(div)
 
-    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras));
-    
     let btnAgregar = document.getElementById(`boton${el.id}`)
     
     btnAgregar.addEventListener('click',()=>{
         agregarAlCarrito(el.id);
     })
+
+    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras))
 
   })
 
@@ -80,8 +79,7 @@ function agregarAlCarrito(id) {
     carritoDeCompras.push(productoAgregar)
     mostrarCarrito(productoAgregar)
     actualizarCarrito()
-    this.guardarProductosLocalstorage(producto);
-    
+        
 }
 
 function mostrarCarrito(productoAgregar) {
