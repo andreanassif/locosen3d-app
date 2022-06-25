@@ -12,6 +12,8 @@ const buscador = document.getElementById('search')
 
 let carritoDeCompras = []
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     if(localStorage.getItem('carritoDeCompras')){
         carritoDeCompras = JSON.parse(localStorage.getItem('carritoDeCompras'))
@@ -66,8 +68,8 @@ function mostrarProductos(array){
         agregarAlCarrito(el.id);
     })
 
-    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras))
-
+    //localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras))
+   
   })
 
 
@@ -79,6 +81,7 @@ function agregarAlCarrito(id) {
     carritoDeCompras.push(productoAgregar)
     mostrarCarrito(productoAgregar)
     actualizarCarrito()
+    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras)) //correcto
         
 }
 
