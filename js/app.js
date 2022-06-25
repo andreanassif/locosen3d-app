@@ -12,15 +12,41 @@ const buscador = document.getElementById('search')
 
 let carritoDeCompras = []
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     if(localStorage.getItem('carritoDeCompras')){
         carritoDeCompras = JSON.parse(localStorage.getItem('carritoDeCompras'))
-        actualizarCarrito()
+        carritoLS()
     }
 })
 
+const carritoLS = () => {
+    contenedorCarrito.innerHTML = ""
+
+    carritoDeCompras.forEach((productoAgregar) => {
+        const div = document.createElement ('div')
+        div.className = ('productoEnCarrito')
+        div.innerHTML = `
+        <p>${productoAgregar.nombre}</p>
+        <p>Precio: $${productoAgregar.precio}</p>
+        <button id="eliminar${productoAgregar.id}" class="boton-eliminar">
+            <i class="fas fa-trash-alt"></i>
+        </button>`
+
+        contenedorCarrito.appendChild(div) 
+        
+        let btnEliminar = document.getElementById(`eliminar${productoAgregar.id}`)
+        btnEliminar.addEventListener('click',()=>{
+        btnEliminar.parentElement.remove()
+        carritoDeCompras = carritoDeCompras.filter(elemento => elemento.id !== productoAgregar.id)
+        console.log(carritoDeCompras);
+        actualizarCarrito()
+    })
+
+    })
+    contadorCarrito.innerText = carritoDeCompras.length
+    precioTotal.innerText = carritoDeCompras.reduce((acc,el)=> acc + el.precio, 0)
+
+}
 
 
 selecTipos.addEventListener('change',()=>{
@@ -81,9 +107,9 @@ function agregarAlCarrito(id) {
     carritoDeCompras.push(productoAgregar)
     mostrarCarrito(productoAgregar)
     actualizarCarrito()
-    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras)) //correcto
         
 }
+
 
 function mostrarCarrito(productoAgregar) {
 
@@ -94,6 +120,7 @@ function mostrarCarrito(productoAgregar) {
                     <button id="eliminar${productoAgregar.id}" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>`
     contenedorCarrito.appendChild(div)
 
+ 
     let btnEliminar = document.getElementById(`eliminar${productoAgregar.id}`)
     btnEliminar.addEventListener('click',()=>{
         btnEliminar.parentElement.remove()
@@ -101,7 +128,10 @@ function mostrarCarrito(productoAgregar) {
         console.log(carritoDeCompras);
         actualizarCarrito()
     })
+
+    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras)) //correcto
 }
+
 
 
 function  actualizarCarrito (){
