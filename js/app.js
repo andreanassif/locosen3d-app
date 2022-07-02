@@ -179,6 +179,7 @@ function  actualizarCarrito (){
 const btnFinCompra = document.getElementById(`finCompra`)
     
     btnFinCompra.addEventListener('click',()=>{
+        carritoDeCompras.length === 0 ? swal("🛒 El carrito se encuentra vacío.") :
         swal("Excelente!", "Su compra ha sido finalizada!", "success");
 
     })
