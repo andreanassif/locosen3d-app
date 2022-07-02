@@ -10,6 +10,12 @@ const precioTotal = document.getElementById('precioTotal');
 const selecTipos = document.getElementById('selecTipos')
 const buscador = document.getElementById('search')
 
+const botonVaciar = document.getElementById('vaciarCarrito')
+const FinCompra = document.getElementById('finCompra')
+
+const cantidad = document.getElementById('cantidad')
+const cantidadTotal = document.getElementById('cantidadTotal')
+
 let carritoDeCompras = []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         carritoLS()
     }
 })
+
 
 const carritoLS = () => {
     contenedorCarrito.innerHTML = ""
@@ -28,12 +35,13 @@ const carritoLS = () => {
         div.innerHTML = `
         <p>${productoAgregar.nombre}</p>
         <p>Precio: $${productoAgregar.precio}</p>
+        <p>Cantidad: <span id="cantidad">${productoAgregar.cantidad}</span></p>
         <button id="eliminar${productoAgregar.id}" class="boton-eliminar">
             <i class="fas fa-trash-alt"></i>
         </button>`
 
         contenedorCarrito.appendChild(div) 
-        
+
         let btnEliminar = document.getElementById(`eliminar${productoAgregar.id}`)
         btnEliminar.addEventListener('click',()=>{
         btnEliminar.parentElement.remove()
@@ -41,6 +49,8 @@ const carritoLS = () => {
         console.log(carritoDeCompras);
         actualizarCarrito()
     })
+
+
 
     })
     contadorCarrito.innerText = carritoDeCompras.length
@@ -88,26 +98,50 @@ function mostrarProductos(array){
 
     contenedorProductos.appendChild(div)
 
-    let btnAgregar = document.getElementById(`boton${el.id}`)
+    const btnAgregar = document.getElementById(`boton${el.id}`)
     
     btnAgregar.addEventListener('click',()=>{
         agregarAlCarrito(el.id);
     })
 
-    //localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras))
-   
   })
 
 
 }
 
-function agregarAlCarrito(id) {
-   
-    let productoAgregar = stockProductos.find(obj=> obj.id === id)
+botonVaciar.addEventListener('click', () => {
+    carritoDeCompras.length = 0 
+    carritoDeCompras.length === 0 && swal("🛒 El carrito se encuentra vacío.");
+    actualizarCarrito()
+})
+
+const agregarAlCarrito = (id) => {
+
+    const existe = carritoDeCompras.some (obj => obj.id === id)
+
+    if (existe){
+        const obj = carritoDeCompras.map (obj => {
+            if (obj.id === id){
+                obj.cantidad++
+            }
+        })
+    } else {
+
+    const productoAgregar = stockProductos.find((obj)=> obj.id === id)
     carritoDeCompras.push(productoAgregar)
     mostrarCarrito(productoAgregar)
-    actualizarCarrito()
+    console.log(carritoDeCompras)
         
+}
+actualizarCarrito()
+}
+
+const eliminar = (id) => {
+    const productoAgregar = carritoDeCompras.find((productoAgregar) => obj.id === id)
+    const indice = carritoDeCompras.indexOf(productoAgregar)
+    carritoDeCompras.splice(indice, 1)
+    actualizarCarrito()
+
 }
 
 
@@ -117,6 +151,7 @@ function mostrarCarrito(productoAgregar) {
     div.setAttribute('class', 'productoEnCarrito')
     div.innerHTML=`<p>${productoAgregar.nombre}</p>
                     <p>Precio: $${productoAgregar.precio}</p>
+                    <p>Cantidad: <span id="cantidad">${productoAgregar.cantidad}</span></p>
                     <button id="eliminar${productoAgregar.id}" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>`
     contenedorCarrito.appendChild(div)
 
@@ -129,23 +164,22 @@ function mostrarCarrito(productoAgregar) {
         actualizarCarrito()
     })
 
-    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras)) //correcto
+    localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras)) 
+
 }
 
 
 
 function  actualizarCarrito (){
     contadorCarrito.innerText = carritoDeCompras.length
-    precioTotal.innerText = carritoDeCompras.reduce((acc,el)=> acc + el.precio, 0)  
+    precioTotal.innerText = carritoDeCompras.reduce((acc,el)=> acc + el.precio, 0)
+    
 }                                                          
 
-let btnFinCompra = document.getElementById(`finCompra`)
+const btnFinCompra = document.getElementById(`finCompra`)
     
     btnFinCompra.addEventListener('click',()=>{
-        procesarPago();
+        swal("Excelente!", "Su compra ha sido finalizada!", "success");
+
     })
-
-
-
-
 

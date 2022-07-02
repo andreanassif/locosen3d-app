@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos a Locos en 3D!</title>
     <script src="https://kit.fontawesome.com/df59baf6b8.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -61,6 +62,7 @@
                   <!-- <div class="productoEnCarrito">
                     <p>Buzo 1</p>
                     <p>Precio: $1200</p>
+                    <p>Cantidad: <span id="cantidad">${productoAgregar.cantidad}</span></p>
                     <button class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
                 </div>   -->
             </div>
@@ -72,8 +74,11 @@
                     <option value="reitro">Retiro en tienda</option>
                 </select>
             </div> -->
+
             <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
-            <div id="terminar" style="display: flex; justify-content: flex-end;">
+            
+            <div id="terminar" style="display: flex; justify-content: space-around;">
+            <button id="vaciarCarrito" type="button" class="btn">Vaciar Carrito</button>
             <button id="finCompra" type="button" class="btn btn-success">Finalizar Compra</button>
             </div>
         </div>
@@ -83,5 +88,7 @@
     <script src="js/stock.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/app.js"></script>
+    
+
 </body>
 </html>

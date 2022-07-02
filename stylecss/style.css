@@ -1,4 +1,4 @@
-* {
+body {
     font-style: normal;
     font-family: "Fredoka One", cursive;
     font-size: 13px;
@@ -11,6 +11,11 @@
     scroll-behavior: smooth;
     background: black;
     list-style-type: none;
+}
+
+
+.card {
+    background: black;
 }
 
 a {
