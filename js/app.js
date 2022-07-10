@@ -184,3 +184,67 @@ const btnFinCompra = document.getElementById(`finCompra`)
 
     })
 
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:3000/comments')
+    .then(response => response.json())
+    .then( comments => {
+        
+        mostrarComentarios (comments)
+    })
+})
+
+function mostrarComentarios(comments) {
+
+    carrousel.innerHTML = ""
+
+    comments.forEach(el => {
+    let div = document.createElement('div')
+
+    div.classList.add('carrousel')
+    div.innerHTML= `<div class="carrousel">
+                        <div class="carrousel-items">
+                            <div class="carrousel-item">
+                                <h3>Nuestros Clientes</h3>
+                                <p>${el.name}</p>
+                                <p>${el.body}</p>
+                            </div>
+                        </div>
+                    </div>`
+
+    carrousel.appendChild(div)
+    
+    })
+
+  };
+
+
+//comentarios
+
+const carrousel = document.querySelector(".carrousel-items");
+
+let intervalo = null;
+
+const start = () => {
+   intervalo = setInterval(function () {
+    carrousel.scrollLeft = carrousel.scrollLeft + 100;
+   }, 10)
+};
+
+const stop = () => {
+    clearInterval(intervalo);
+};
+
+carrousel.addEventListener("mouseover", () => {
+    stop();
+})
+
+carrousel.addEventListener("mouseout", () => {
+    start();
+})
+
+start();
+
+
+
