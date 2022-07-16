@@ -203,14 +203,10 @@ function mostrarComentarios(comments) {
     let div = document.createElement('div')
 
     div.classList.add('carrousel')
-    div.innerHTML= `<div class="carrousel">
-                        <div class="carrousel-items">
-                            <div class="carrousel-item">
+    div.innerHTML= `<div class="carrousel-item">
                                 <h3>Nuestros Clientes</h3>
                                 <p>${el.name}</p>
                                 <p>${el.body}</p>
-                            </div>
-                        </div>
                     </div>`
 
     carrousel.appendChild(div)
@@ -222,7 +218,7 @@ function mostrarComentarios(comments) {
 
 //comentarios
 
-const carrousel = document.querySelector(".carrousel-items");
+const carrousel = document.getElementById('carrousel');
 
 let intervalo = null;
 
