@@ -205,6 +205,7 @@ function mostrarComentarios(comments) {
     div.classList.add('carrousel')
     div.innerHTML= `<div class="carrousel-item">
                                 <h3>Nuestros Clientes</h3>
+                                <img src="${el.img}" alt="">
                                 <p>${el.name}</p>
                                 <p>${el.body}</p>
                     </div>`
@@ -215,9 +216,7 @@ function mostrarComentarios(comments) {
 
   };
 
-
-//comentarios
-
+/* 
 const carrousel = document.getElementById('carrousel');
 
 let intervalo = null;
@@ -239,6 +238,36 @@ carrousel.addEventListener("mouseover", () => {
 carrousel.addEventListener("mouseout", () => {
     start();
 })
+
+start(); */
+
+const carrousel = document.querySelector(".carrousel-items");
+
+let maxScrollLeft = carrousel.scrollWidth - carrousel.clientWidth;
+let intervalo = null;
+let step = 1;
+const start = () => {
+  intervalo = setInterval(function () {
+    carrousel.scrollLeft = carrousel.scrollLeft + step;
+    if (carrousel.scrollLeft === maxScrollLeft) {
+      step = step * -1;
+    } else if (carrousel.scrollLeft === 0) {
+      step = step * -1;
+    }
+  }, 10);
+};
+
+const stop = () => {
+  clearInterval(intervalo);
+};
+
+carrousel.addEventListener("mouseover", () => {
+  stop();
+});
+
+carrousel.addEventListener("mouseout", () => {
+  start();
+});
 
 start();
 

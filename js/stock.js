@@ -9,6 +9,7 @@ let stockProductos = [
     {id: 8, nombre: "Pulpo articulado", tipo: "juego", cantidad: 1, desc: "Varios diseños y colores, incluso puede ser un llavero simpático.", precio: 250, img: 'assets/pulpoarticulado.jpg'},
     {id: 9, nombre: "Lapiceros personalizados", tipo: "lapiceros", cantidad: 1, desc: "Varios diseños y colores.", precio: 1800, img: 'assets/lapicero-mojo-gris.jpeg'},
     {id: 10, nombre: "Homero + dona", tipo: "deco", cantidad: 1, desc: "Decorá tus paredes. Varios diseños y colores.", precio: 500, img: 'assets/deco-homero-dona.jpeg'},
-    {id: 11, nombre: "Flander", tipo: "deco", cantidad: 1, desc: "Decorá tus paredes. Varios diseños y colores.", precio: 500, img: "assets/deco-flander.jpg" }
+    {id: 11, nombre: "Flander", tipo: "deco", cantidad: 1, desc: "Decorá tus paredes. Varios diseños y colores.", precio: 500, img: "assets/deco-flander.jpg" },
+    {id: 12, nombre: "Mates Personalizados", tipo: "deco", cantidad: 1, desc: "Elegí el que quieras para tomar mate. Varios diseños y colores.", precio: 2000, img: "assets/mates-personalizados.jpeg"},
 
 ]
